@@ -1,0 +1,29 @@
+from cryptography.fernet import Fernet
+
+# Given key and encrypted text
+key = b'8lb__EKHCRkyAd9EQju6z56boaboPVUmpVCJdWaOyMk='
+encrypted_text = 'gAAAAABnKEsfqYalva5oAF0qKGS551mjgrDd4JgKtAvDtuYVlomuTNhFhVmz7_CF6F_w2279CUEc2jUT0hUn3L9O6Qot5KI2evUiRRpG1UsEQobMJiGdtzocD3M083rh2sHyIHRI_NJ-T4P_7qRmrUn_b-yZh5F5uaV04tLZ1b3x48mVCvY1SUcHoc3SAzzbKR2TBIlXFmsuz5ooE-SEOtlnXZVkmbhT_L67dIjZlqT3-F1BAYIuWFVWQuSd0Tj_3BHfUEyds0gpT4sYMSnhXDgjgsSACbqkDuelGYi15lZTLHDsUgfgcO1WT6gA8rO7GLhDWgaUbzdghDB4SJGVmVIhGfIxfPfzQqlR_6RL5YOdoh4eNiLaV-FmbaPC_Y-fGfB4bwjTnZBtPMBE5XXsrmo7pNJ1erq7kZoJtp7S6NpY5znI0XYDh-QEh5ctjCSkkzaWodUc5t_hSiJ1tHh14z4zfisl8gP40fJSzCUxp9Dk2t8YlLJITmubdt8CfiLRAnYFz7m1UM-Kf8NeKYg5RGgWIlZYsY3MNSzP216GAlli7IB7xDRAw6ot_QGmf5MhIFwkwN3MG7LHvCu0fTbOHa1msuwJHxSFzRy0xZwti_OEkrxcRcAB2u5006RPkqH61xxCdzA6F6AIlBDo31sRVUpuN-QtSYscvzwK9Xfh5eUxbsnbKDunUeFV4f0GV2Wp92QflAOPO9Q15dMKpUdrUy0gfI-J0cjDZuv6fVwe1xQ-zbPnFLpD4qWOT2uY70Rk-EU-yYiF5Ihk76X7YS8IlitD1zJyxV3BwNdCGPOsxYkJcC5eorVBHZ5SWmfL2mE4-6FAWYVNYwXooxlCzXsJvCNz5fI1mteivoHv9tjMe5Cy17-P2Qr3saIWKR7jmoHCXHvayuhxQQtFWqsQwKhax_wkW9eESHYfmvmCMwz07lUNGVC7fRPLSQai-nOfzmHUffcn0yacoRVJ'
+
+# Decrypt the text
+fernet = Fernet(key)
+decrypted_text = fernet.decrypt(encrypted_text.encode()).decode()
+
+# Print the decrypted text
+print(decrypted_text)
+
+# Given decrypted text
+decrypted_text = """
+two U+1F605 U+1F642 six five U+1F605 four zero two eight zero U+1F604 four eight U+1F60D three U+1F600 U+1F601 U+1F604 U+1F601 eight U+1F603 five nine U+1F923 nine U+1F603 U+1F601 U+1F602 zero three U+1F60D three two U+1F60D seven U+1F603 U+1F604 four U+1F606 seven one U+1F600 nine U+1F602 U+1F602 U+1F605 U+1F642 one U+1F604 U+1F605 six U+1F60D U+1F602 six U+1F600 U+1F642 U+1F600 U+1F604 U+1F600 U+1F603 U+1F602 U+1F60D U+1F603 U+1F923 U+1F606 two one U+1F60D five U+1F604 U+1F604 one U+1F602 nine U+1F923 U+1F603 U+1F603 six U+1F605 U+1F603 five nine zero six nine U+1F642 three two U+1F601 five U+1F605 eight U+1F606 two U+1F603 U+1F605 U+1F601 U+1F605 U+1F923 .
+"""
+
+# Function to replace Unicode with actual emojis
+def unicode_to_emoji(text):
+    import re
+    def replace_unicode(match):
+        return chr(int(match.group(1), 16))
+    
+    return re.sub(r'U\+([0-9A-Fa-f]{4})', replace_unicode, text)
+
+# Convert and print the result
+final_text = unicode_to_emoji(decrypted_text)
+print(final_text)
